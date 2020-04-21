@@ -15,6 +15,8 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.Arrays;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 @DataMongoTest
 @ExtendWith(SpringExtension.class)
 @Import(DatabaseTestConfiguration.class)
@@ -25,17 +27,18 @@ public class DatabaseIntegrationTest {
 
 
     @BeforeEach
-    public void BeforeEach() {
+    public void beforeEach() {
         this.mongoTemplate.insertAll(Arrays.asList(new Airport()));
     }
 
     @AfterEach
-    public void AfterEach() {
+    public void afterEach() {
         this.mongoTemplate.dropCollection(Airport.class);
     }
 
     @Test
     public void count_should_be_3() {
         long count = this.mongoTemplate.count(new Query(), Airport.class);
+        assertEquals(3, count);
     }
 }

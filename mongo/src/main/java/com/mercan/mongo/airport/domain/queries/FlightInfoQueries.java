@@ -23,7 +23,7 @@ public class FlightInfoQueries {
 
     private final MongoTemplate mongoTemplate;
 
-    public List<FlightInfo> findAll(String field, int PageNb, int pageSize) {
+    public List<FlightInfo> findAll(String field, int pageNb, int pageSize) {
         Query allPagedAndOrdered = new Query().with(Sort.by(Sort.Direction.ASC, field));
         return this.mongoTemplate.find(allPagedAndOrdered, FlightInfo.class);
     }

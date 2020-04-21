@@ -26,7 +26,7 @@ public class ApplicationRunner implements CommandLineRunner {
                 .with(Sort.by(Sort.Direction.DESC, "destination"))
                 .with(PageRequest.of(1, 10));
         List<FlightInfo> flightInfos = this.mongoTemplate.find(destQuery, FlightInfo.class);
-
+        System.out.println("Count of flights: " + flightInfos.size());
 
         Query.query(Criteria.where("engine.needsMaintenance").is(true));
         System.out.println("Application is started ");
